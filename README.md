@@ -29,9 +29,12 @@ ShowingTitle > CountingDown > PlayingGame > ShowingScore > CountingDown . . .
   - This will be provided post-game when the final score is tallied
   - There is a minimum qualifying score for these awards
   - There will be three (3) different awards
-- Implement a pause feature (4th:NotStarted)
+- Implement a pause feature (4th:InProgress)
   - This feature sets a flag that is used to determine whether to apply
     updates or not.
     - add flag `paused`
     - add condition check to `love.keypressed` for `p` and `space` keys to set `pause`
     - add condition check to `love.update` for `paused` to run `StateMachine:update`
+    - Initial implementation added to main.lua.
+      - Performance coming out of pause is below average.  If pressing the 'flap' button
+        upon unpause, quite a few frames are dropped.
