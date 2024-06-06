@@ -50,6 +50,8 @@ local bkgd_scroll = 0
 local gd = love.graphics.newImage('ground.png')
 local gd_scroll = 0
 
+local game_paused = false
+
 local bird = Bird()
 
 -- table for tracking spawned Pipes
@@ -123,6 +125,8 @@ function love.keypressed(key)
 
     if key == 'escape' then
         love.event.quit()
+    elseif key == 'p' then
+        game_paused = not game_paused
     end
 end
 
@@ -131,17 +135,24 @@ function love.keyboard.wasPressed(key)
 end
 
 function love.update(dt)
-    -- Adds global scroll speed const * delta for time-independent updates.
-    -- Also uses modulo to calculate an offset.  the BKGD_LOOP_POINT is the
-    -- coordinate on the x-axis that maintain the illusion of continuity
+    if not game_paused then
+        if not sounds['music']:isPlaying() then
+            sounds['music']:play()
+        end
+        -- Adds global scroll speed const * delta for time-independent updates.
+        -- Also uses modulo to calculate an offset.  the BKGD_LOOP_POINT is the
+        -- coordinate on the x-axis that maintain the illusion of continuity
 
-    -- scroll background by preset speed * dt, looping back to 0 after the looping point
-    bkgd_scroll = (bkgd_scroll + BKGD_SCROLL_SPEED * dt) % BKGD_LOOP_POINT
-    -- scroll ground by preset speed * dt, looping back to 0 after the passing the screen's width
-    gd_scroll = (gd_scroll + GD_SCROLL_SPEED * dt) % VIRTUAL_WIDTH
+        -- scroll background by preset speed * dt, looping back to 0 after the looping point
+        bkgd_scroll = (bkgd_scroll + BKGD_SCROLL_SPEED * dt) % BKGD_LOOP_POINT
+        -- scroll ground by preset speed * dt, looping back to 0 after the passing the screen's width
+        gd_scroll = (gd_scroll + GD_SCROLL_SPEED * dt) % VIRTUAL_WIDTH
 
-    gameSM:update(dt)
-    console:update(dt)
+        gameSM:update(dt)
+        console:update(dt)
+    else
+        sounds['music']:pause()
+    end
 
     -- reset input table
     love.keyboard.keysPressed = {}
