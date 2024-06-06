@@ -23,7 +23,7 @@ ShowingTitle > CountingDown > PlayingGame > ShowingScore > CountingDown . . .
         - Added noise variable to `PlayingGame`
         - when timer initially reaches limit, new limit is a random number between limit - (noise / 2) and limit + (noise / 2)
           - currently retrieving exact random numbers
-          - http://lua-users.org/wiki/MathLibraryTutorial may hold some insight towards improving the outcome
+          - <http://lua-users.org/wiki/MathLibraryTutorial> may hold some insight towards improving the outcome
           - `math.randomseed(os.time()); math.random(); math.random(); math.random` ???
 - Award players a "medal" based on their score, using images (3rd:NotStarted)
   - This will be provided post-game when the final score is tallied
