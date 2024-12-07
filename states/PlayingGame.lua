@@ -90,6 +90,8 @@ function PlayingGame:render()
     love.graphics.print('Score: ' .. tostring(self.score), 8, 8)
     console:logToSlot(2, 'Collisions off: ' .. tostring(self.bird.ignoreCollisions))
     console:logToSlot(3, 'Current timer limit: ' .. tostring(self.limit))
+    print('Current timer limit: ' .. tostring(self.limit))
+    print('Lower pipe Y: ' .. pairLower .. ', ' .. 'Upper pipe Y: ' .. pairUpper)
     console:logToSlot(4, pairLower .. ', ' .. pairUpper)
 
     self.bird:render()

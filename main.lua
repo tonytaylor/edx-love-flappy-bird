@@ -15,6 +15,8 @@
 push = require 'push'
 -- OOP class library
 Class = require 'class'
+-- Debugger
+require 'lovedebug.lovedebug'
 -- player character
 require 'Bird'
 -- game obstacle
